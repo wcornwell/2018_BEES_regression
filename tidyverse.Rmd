@@ -1,7 +1,6 @@
 ---
 title: "Introduction to the Tidyverse"
-author: "Daniel Falster"
-date: "6 March 2018"
+date: "April 2018"
 output: 
     ioslides_presentation
 ---
@@ -12,12 +11,22 @@ output:
 * Designed to help you fall into a **"Pit of Success"**
 * Tools designed for: 1) Turning data into tidy data, and 2) Plotting & analysing Tidy Data
 * Dataframes (tibbles) are the universal "tidy" input and output
+* All data is not tidy, but most can be
 * A tidy dataframe has: 1 observation per row, 1 variable per column
-* Not one but a collection packages
+
+## You want to one of two things with data
+
+1. Plot
+2. Model / Analyze
+
+## Workflow
+
+Untidy data %>% tidy data %>% plots and analysis
+
 
 ## Load individually or all together
 
-```{r, eval = FALSE}
+```{r, eval = FALSE,message=FALSE}
 library(dplyr)
 library(readr)
 library(tidyr)
@@ -33,6 +42,7 @@ library(tidyverse)
 * Fast
 * Won't convert strings to factors
 * Can control how columns are parsed
+* Not always good with Japanese characters
 
 ```{r}
 data <- read_csv("data/plantHeight5Spp.csv")  
@@ -136,11 +146,11 @@ data %>%
   summarise(ht_mn = mean(height), n = n())
 ```
 
-Split by country
+## Split by country
 ```{r}
 data %>%
   group_by(Country) %>% 
-  summarise(ht_mn = mean(height), ht_sd = sd(height), n = n())
+  summarise(ht_mn = mean(height), ht_sd = sd(height), n = n()) 
 ```
 
 ## Use [count](http://dplyr.tidyverse.org/reference/count.html) to examine a single column
