@@ -1,84 +1,7 @@
 # BEES stats course 2018 - intro to R
 Below is an overview of the content we intend to cover - most of it will be taught as "live coding" and there are associated exercises in the exercises page ([Exercises.md](https://github.com/nicercode/2018_BEES_regression/blob/master/Exercises.md))
 
-## Monday:
-
-#### crash-course to R and Rstudio [Mitch]
-
-- console vs script files (.R files)
-- R and Rmd files
-- objects:
-	- variables (assignment, access)
-	- functions (execution + more on Wednesday)
-- object 'environments': global vs. function
-- variables:
-	- 'data' objects have 'classes' and 'structure':
-		- structure: vector, matrix, array, list, data.frame ++ 
-		- type: numeric, integer, character, logical, factor
-	- saving: .rds, .Rdata, .Rhistory
-	- aim to avoid .RData, attach() and detach() (more on namespaces on Thursday)
-- errors and warnings
-- workflow strategy --> run chunks, check (not line by line)
-- packages: base-R vs. contributed (more on Thursday)
-
-- **Things we skipped**:
-	- saving objects
-	- things to avoid (saving, attach/detach)
-
-#### Project organisation -- Keeping things undercontrol [Daniel]
-
-- Intro
-  - Who am I: 2 things - plants, happy coder
-	- Today, top tip for happy coding
-	- structure for organising yourself
-	- not only way you can do it, but unless have other good ideas, consider adopting it
-- Path names
-	- You have to know where things are
-	- Where on your computer: getwd()
-	- What's in the folder: dir() 
-	- dir vs ls
-	- **Challenge:**
-- Projects
-	- How do we organise materials?
-	- What is a meaningful unit for project? (A chapter or analysis)
-		- **Happy coder rule**: Projects are distinct & self contained
-		- start with a folder for project
-	- Key parts: What sort of files do we have to deal with?
-		- README.md -- orients
-		- data/
-		- analysis.Rmd
-		- R/
-	- Pathnames: Relative vs absolute
-		- **Happy coder rule**: use relative paths
-			1. can move projects around and still use it
-			2. collaboration
-		- Exercise: try with absolute and relative 
-			- dir() 
-			- dir.create()
-			- read_csv
-			- write_csv
-	- Rstudio project files
-		- opening projects
-		- **Happy coder rule**: use Rstduio's project files
-		- **Rule: never use setwd**
-		- [Hadley Wickham on opening Rstudio projects](https://youtu.be/boKFxBniUH0) 
-	- **Challenge**
-- **More Rules:**
-	- consistent project structure
-	- data is read-only (and precious)
-	- everything in R is a function
-	- output is disposable
-	- top script is simple and readable
-	- readme.md: introduction,
-	- Rmd files: top or inst directory
-- References
-	- http://environmentalcomputing.net/basic-project-management/
-	- http://nicercode.github.io/blog/2013-05-17-organising-my-project/
-	- http://nicercode.github.io/blog/2013-04-05-projects/
-
-## Tuesday:
-
-#### Intro to tidyverse [Daniel]
+### Intro to tidyverse 
 
 - readr
 - dplyr
@@ -111,9 +34,7 @@ Tutorials:
 - [Miles McBain's Into to tidyverse](https://github.com/MilesMcBain/tidycourse)
 
 
-## Wednesday:
-
-#### Plotting with ggplot  [Mitch]
+### Plotting with ggplot  [Mitch]
 
 - installing and loading the {ggplot2} package
 - data structure (data.frames or tibbles)
@@ -136,9 +57,9 @@ Tutorials:
 - more customised themes
 - opinion: incredibly powerful and efficient for visualising lots of information, BUT, really fine-scale aesthetics can be diminishing returns...
 
-## Thursday:
 
-#### Using functions in R [Daniel]
+
+### Using functions in R 
 
 ```
 library(dplyr)
@@ -163,13 +84,6 @@ mymean <- function(..., na.rm=TRUE) {
 }
 ```
 
-#### packages in R [Daniel]
-
-- finding, installing, versions
-	- CRAN
-- non-cran (github, r-forge etc.)
-	- ways to install
-
 ### ggplot extended 
 
 - adding predicted data to ggplots
@@ -178,16 +92,3 @@ mymean <- function(..., na.rm=TRUE) {
 - string inputs e.g. aes_string()
 - plotly (interactive)
 
-
-#### Further topics (Show and tell)
-
-- getting help: stackoverflow, MWEs [Mitch]
-- Reproducible workflows [Daniel]
-	- Projects, end to end
-	- Rmd: notebooks vs knitr reports
-- Style 
-	- white space, tabs, naming
-	- Rstudio indent  / reflow commands
-- Continued learning: [Daniel + Mitch]
-	- at UNSW
-	- elsewhere
