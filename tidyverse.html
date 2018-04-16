@@ -29,14 +29,6 @@
 
       // Author information
       presenters: [
-            {
-        name:  'Daniel Falster' ,
-        company: '',
-        gplus: '',
-        twitter: '',
-        www: '',
-        github: ''
-      },
             ]
     };
   </script>
@@ -93,7 +85,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">6 March 2018</p>
+            <p style="margin-top: 6px; margin-left: -2px;">April 2018</p>
           </hgroup>
   </slide>
 
@@ -104,9 +96,20 @@
 <li>Designed to help you fall into a <strong>&quot;Pit of Success&quot;</strong></li>
 <li>Tools designed for: 1) Turning data into tidy data, and 2) Plotting &amp; analysing Tidy Data</li>
 <li>Dataframes (tibbles) are the universal &quot;tidy&quot; input and output</li>
+<li>All data is not tidy, but most can be</li>
 <li>A tidy dataframe has: 1 observation per row, 1 variable per column</li>
-<li>Not one but a collection packages</li>
 </ul>
+
+</article></slide><slide class=""><hgroup><h2>You want to one of two things with data</h2></hgroup><article  id="you-want-to-one-of-two-things-with-data">
+
+<ol>
+<li>Plot</li>
+<li>Model / Analyze</li>
+</ol>
+
+</article></slide><slide class=""><hgroup><h2>Workflow</h2></hgroup><article  id="workflow">
+
+<p>Untidy data %&gt;% tidy data %&gt;% plots and analysis</p>
 
 </article></slide><slide class=""><hgroup><h2>Load individually or all together</h2></hgroup><article  id="load-individually-or-all-together">
 
@@ -119,25 +122,17 @@ library(tidyr)
 
 <pre class = 'prettyprint lang-r'>library(tidyverse)</pre>
 
-<pre >## Loading tidyverse: ggplot2
-## Loading tidyverse: tibble
-## Loading tidyverse: tidyr
-## Loading tidyverse: readr
-## Loading tidyverse: purrr
-## Loading tidyverse: dplyr</pre>
+<pre >## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</pre>
 
-<pre >## Warning: package &#39;tibble&#39; was built under R version 3.4.3</pre>
+<pre >## ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.4     
+## ✔ tibble  1.4.2          ✔ dplyr   0.7.4     
+## ✔ tidyr   0.8.0          ✔ stringr 1.3.0     
+## ✔ readr   1.1.1          ✔ forcats 0.2.0</pre>
 
-<pre >## Warning: package &#39;tidyr&#39; was built under R version 3.4.3</pre>
-
-<pre >## Warning: package &#39;purrr&#39; was built under R version 3.4.2</pre>
-
-<pre >## Warning: package &#39;dplyr&#39; was built under R version 3.4.2</pre>
-
-<pre >## Conflicts with tidy packages ----------------------------------------------</pre>
-
-<pre >## filter(): dplyr, stats
-## lag():    dplyr, stats</pre>
+<pre >## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ✖ dplyr::vars()   masks ggplot2::vars()</pre>
 
 </article></slide><slide class=""><hgroup><h2><a href='readr.tidyverse.org' title=''><code>readr</code></a>- For reading and writing data</h2></hgroup><article  id="readr--for-reading-and-writing-data">
 
@@ -145,6 +140,7 @@ library(tidyr)
 <li>Fast</li>
 <li>Won&#39;t convert strings to factors</li>
 <li>Can control how columns are parsed</li>
+<li>Not always good with Japanese characters</li>
 </ul>
 
 <pre class = 'prettyprint lang-r'>data &lt;- read_csv(&quot;data/plantHeight5Spp.csv&quot;)  </pre>
@@ -437,11 +433,11 @@ library(tidyr)
 <pre class = 'prettyprint lang-r'>data %&gt;%
   summarise(ht_mn = mean(height), n = n())</pre>
 
-<p>Split by country</p>
+</article></slide><slide class=""><hgroup><h2>Split by country</h2></hgroup><article  id="split-by-country">
 
 <pre class = 'prettyprint lang-r'>data %&gt;%
   group_by(Country) %&gt;% 
-  summarise(ht_mn = mean(height), ht_sd = sd(height), n = n())</pre>
+  summarise(ht_mn = mean(height), ht_sd = sd(height), n = n()) </pre>
 
 <pre >## # A tibble: 24 x 4
 ##    Country     ht_mn  ht_sd     n
@@ -507,22 +503,75 @@ library(tidyr)
   select_if(is.numeric) %&gt;%
   skimr::skim()</pre>
 
-<pre >## Numeric Variables
-## # A tibble: 29 x 13
-##    var        type    missing complete     n     mean      sd       min
-##    &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-##  1 alt        integer     0        425   425  365     494     - 71.0   
-##  2 diurn.temp numeric     0        425   425    9.82    3.14     4.80  
-##  3 height     numeric     0        425   425    8.75   10.9      0.0150
-##  4 hemisphere integer     0        425   425 -  0.266   0.965 -  1.00  
-##  5 isotherm   numeric     0        425   425    5.14    1.60     1.80  
-##  6 LAI        numeric    12.0      413   425    3.02    1.28     0.510 
-##  7 lat        numeric     0        425   425   31.2    17.2      2.16  
-##  8 loght      numeric     0        425   425    0.440   0.812 -  1.82  
-##  9 long       numeric     0        425   425   43.8   116     -179     
-## 10 NPP        integer    12.0      413   425  973     633        4.00  
-## # ... with 19 more rows, and 5 more variables: `25% quantile` &lt;dbl&gt;,
-## #   median &lt;dbl&gt;, `75% quantile` &lt;dbl&gt;, max &lt;dbl&gt;, hist &lt;chr&gt;</pre>
+<pre >## Skim summary statistics
+##  n obs: 425 
+##  n variables: 29 
+## 
+## Variable type: integer 
+##     variable missing complete   n     mean      sd  p0  p25   p50   p75
+##          alt       0      425 425   364.66  494.28 -71   47   165   521
+##   hemisphere       0      425 425    -0.27    0.97  -1   -1    -1     1
+##          NPP      12      413 425   973.09  632.83   4  478   827  1475
+##         rain       0      425 425  1350.99  978.54  73  526  1036  2494
+##  rain.coldqr       0      425 425   243.43  192.55   0   71   265   371
+##    rain.drym       0      425 425    46.1    42.96   0   11    28    82
+##   rain.dryqr       0      425 425   158.69  140.67   0   40   105   288
+##    rain.seas       0      425 425    47.6    25.78  11   30    41    60
+##  rain.warmqr       0      425 425   415.77  364.61   0  109   299   689
+##    rain.wetm       0      425 425   200.31  141.89  12   70   159   362
+##   rain.wetqr       0      425 425   547     388.13  31  176   426  1003
+##         site       0      425 425    98.96   64.87   3   49    83   151
+##  sort_number       0      425 425 16568.83 9668.81  23 8786 15651 24987
+##   p100     hist
+##   2966 ▇▂▂▁▁▁▁▁
+##      1 ▇▁▁▁▁▁▁▅
+##   2296 ▆▇▆▅▃▂▇▁
+##   3283 ▇▇▇▃▂▁▇▃
+##    975 ▇▂▆▃▂▁▁▁
+##    160 ▇▃▁▂▂▂▁▁
+##    521 ▇▃▂▂▂▃▁▁
+##    118 ▅▇▇▃▂▂▂▁
+##   1136 ▇▃▅▁▁▁▁▅
+##    515 ▇▆▃▂▂▆▂▁
+##   1422 ▇▆▃▂▂▆▂▁
+##    222 ▇▅▇▅▃▃▂▅
+##  32737 ▃▅▇▂▃▅▃▆
+## 
+## Variable type: numeric 
+##          variable missing complete   n  mean     sd       p0    p25   p50
+##        diurn.temp       0      425 425  9.82   3.14    4.8     6.8   9.9 
+##            height       0      425 425  8.75  10.87    0.015   0.6   4   
+##          isotherm       0      425 425  5.14   1.6     1.8     4.6   5.1 
+##               LAI      12      413 425  3.02   1.28    0.51    1.89  3.26
+##               lat       0      425 425 31.21  17.22    2.16   17.45 31.36
+##             loght       0      425 425  0.44   0.81   -1.82   -0.22  0.6 
+##              long       0      425 425 43.82 115.73 -178.57  -70.92 34.94
+##              temp       0      425 425 16.15   9.77  -11.1    10.8  18.6 
+##    temp.ann.range       0      425 425 21.57  10.31    5.4    11.9  20.3 
+##     temp.max.warm       0      425 425 27.19   6.73    6      24.2  29.8 
+##  temp.mean.coldqr       0      425 425 10.8   13.07  -25.5     3.8  12.1 
+##   temp.mean.dryqr       0      425 425 14.99  11.12  -16.2    12.3  17.7 
+##  temp.mean.warmqr       0      425 425 21.32   6.78    1.7    17.6  23.6 
+##   temp.mean.wetqr       0      425 425 18.22   9.13  -10.6    10.9  21.6 
+##     temp.min.cold       0      425 425  5.63  13.57  -31.4    -2.4   5.9 
+##         temp.seas       0      425 425  4.13   3.18    0.2     1.3   3.6 
+##     p75   p100     hist
+##   11.5   17.9  ▇▃▅▇▃▃▁▂
+##   15     61    ▇▂▁▁▁▁▁▁
+##    6.3    9.1  ▃▁▂▇▅▂▂▁
+##    4.26   4.51 ▂▃▁▃▁▂▁▇
+##   39.08  74.48 ▂▇▃▆▃▁▁▂
+##    1.18   1.79 ▁▂▃▅▅▆▇▅
+##  151.12 179.97 ▁▃▅▁▃▁▂▇
+##   24.8   27.7  ▁▁▁▂▂▅▅▇
+##   28.6   52    ▇▃▇▅▅▂▁▁
+##   31.2   41.7  ▁▂▁▂▃▇▂▁
+##   23     27.5  ▁▁▂▂▂▆▂▇
+##   23.2   27.5  ▁▁▁▁▁▅▅▇
+##   26.5   31.9  ▁▁▁▂▂▃▇▁
+##   26.2   29.5  ▁▁▂▂▃▁▃▇
+##   18.5   25.2  ▂▁▁▃▅▇▃▇
+##    6     15.1  ▇▆▃▂▂▁▁▁</pre>
 
 </article></slide><slide class=""><hgroup><h2>Use <a href='http://dplyr.tidyverse.org/reference/join.html' title=''>join</a> to connect two data frames</h2></hgroup><article  id="use-join-to-connect-two-data-frames">
 
@@ -551,16 +600,16 @@ gather(stocks, stock, price, -time)</pre>
 <pre >## # A tibble: 30 x 3
 ##    time       stock   price
 ##    &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;
-##  1 2009-01-01 X      0.562 
-##  2 2009-01-02 X      1.15  
-##  3 2009-01-03 X     -0.588 
-##  4 2009-01-04 X     -1.04  
-##  5 2009-01-05 X      0.526 
-##  6 2009-01-06 X      0.832 
-##  7 2009-01-07 X      0.553 
-##  8 2009-01-08 X      1.06  
-##  9 2009-01-09 X     -0.0786
-## 10 2009-01-10 X     -0.338 
+##  1 2009-01-01 X      0.0605
+##  2 2009-01-02 X     -0.440 
+##  3 2009-01-03 X     -0.534 
+##  4 2009-01-04 X     -0.0419
+##  5 2009-01-05 X      0.743 
+##  6 2009-01-06 X      1.26  
+##  7 2009-01-07 X     -0.192 
+##  8 2009-01-08 X     -0.889 
+##  9 2009-01-09 X     -0.242 
+## 10 2009-01-10 X     -0.522 
 ## # ... with 20 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Use tidyr&#39;s <a href='http://tidyr.tidyverse.org/reference/gather.html' title=''>spread</a> to spread a key-value pair across multiple columns</h2></hgroup><article  id="use-tidyrs-spread-to-spread-a-key-value-pair-across-multiple-columns">
@@ -571,18 +620,18 @@ gather(stocks, stock, price, -time)</pre>
 stocksm %&gt;% spread(stock, price)</pre>
 
 <pre >## # A tibble: 10 x 4
-##    time             X      Y      Z
-##    &lt;date&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 2009-01-01  0.562  -2.12   0.190
-##  2 2009-01-02  1.15    0.373  2.68 
-##  3 2009-01-03 -0.588   1.10  -1.39 
-##  4 2009-01-04 -1.04   -0.234  1.21 
-##  5 2009-01-05  0.526  -3.89  -2.64 
-##  6 2009-01-06  0.832   2.35   1.10 
-##  7 2009-01-07  0.553  -0.253 -5.88 
-##  8 2009-01-08  1.06    4.83   1.50 
-##  9 2009-01-09 -0.0786 -4.14   8.52 
-## 10 2009-01-10 -0.338  -0.859  4.74</pre>
+##    time             X       Y      Z
+##    &lt;date&gt;       &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+##  1 2009-01-01  0.0605  0.347   2.20 
+##  2 2009-01-02 -0.440   4.33   -1.68 
+##  3 2009-01-03 -0.534   2.64    0.544
+##  4 2009-01-04 -0.0419  4.28    5.73 
+##  5 2009-01-05  0.743   0.0900 -2.99 
+##  6 2009-01-06  1.26    0.369  -2.80 
+##  7 2009-01-07 -0.192  -1.63   -1.76 
+##  8 2009-01-08 -0.889  -1.40   -1.72 
+##  9 2009-01-09 -0.242   0.161  -0.965
+## 10 2009-01-10 -0.522  -0.769  -3.79</pre>
 
 </article></slide><slide class=""><hgroup><h2>Further information</h2></hgroup><article  id="further-information">
 
